@@ -1,20 +1,29 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
 export default function Background({ children }) {
   return (
-    <ImageBackground
-      source={require('../assets/images/background_app.jpg')}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      {children}
-    </ImageBackground>
+    <View style={styles.container}>
+      <ImageBackground
+        source={require('../assets/images/background_app.jpg')}
+        style={styles.image}
+        resizeMode="cover"
+        imageStyle={{opacity:0.5}}
+      >
+        {children}
+      </ImageBackground>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
+  container: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    alignContent:'center',
+    alignItems:'center',
+    backgroundColor:'black'
   },
 });

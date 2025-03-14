@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StatusBar, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, StyleSheet, Button } from 'react-native';
 import Background from '../components/Background';
+import Logo from '../components/logo';
 
 export default function Home() {
   return (
     <Background>
       <View style={styles.container}>
-        <Text style={{fontFamily:'fungames', color:'yellow', fontSize:50}}>QuizGenAI</Text>
+        <Logo />
         <StatusBar style="auto" />
       </View>
     </Background>

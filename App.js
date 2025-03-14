@@ -9,7 +9,7 @@ import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  // Carregue a(s) fonte(s) que você precisa
+  
   const [fontsLoaded] = useFonts({
     'Yang Bung font': require('./src/assets/fonts/tittle_font.otf'),
     'rocket_racoon': require('./src/assets/fonts/RocketRaccoon.otf'),
