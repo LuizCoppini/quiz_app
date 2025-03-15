@@ -1,31 +1,27 @@
-// App.js
 import React, { useCallback } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import Home from './src/screens/Home';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-// Impede que a splash screen feche antes de carregarmos a fonte
+// Impede que a splash screen feche automaticamente
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  
   const [fontsLoaded] = useFonts({
     'Yang Bung font': require('./src/assets/fonts/tittle_font.otf'),
     'rocket_racoon': require('./src/assets/fonts/RocketRaccoon.otf'),
     'dantene': require('./src/assets/fonts/Dantene.otf'),
     'fungames': require('./src/assets/fonts/Fungames.otf'),
-    // Adicione mais fontes se quiser
   });
 
-  // Quando as fontes estiverem prontas, esconda a splash screen
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
+      console.log("🔹 Fontes carregadas, escondendo Splash Screen...");
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
-  // Enquanto as fontes não carregaram, você pode retornar algo simples, tipo um loader
   if (!fontsLoaded) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -34,6 +30,9 @@ export default function App() {
     );
   }
 
-  // Assim que as fontes estiverem carregadas, renderize sua tela principal
-  return <Home onLayout={onLayoutRootView} />;
+  return (
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <Home />
+    </View>
+  );
 }
