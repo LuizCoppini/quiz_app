@@ -1,33 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import Home from './src/screens/Home';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+
+// Impede que a splash screen feche automaticamente
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  return (
-    <ImageBackground
-      source={require('./assets/background_app.jpg')}
-      style={styles.background}
-      resizeMode="cover" // Ajusta a imagem ao tamanho da tela
-    >
-      <View style={styles.container}>
-        <Text style={styles.text}>Hello World!</Text>
-        <StatusBar style="auto" />
+  const [fontsLoaded] = useFonts({
+    'Yang Bung font': require('./src/assets/fonts/tittle_font.otf'),
+    'rocket_racoon': require('./src/assets/fonts/RocketRaccoon.otf'),
+    'dantene': require('./src/assets/fonts/Dantene.otf'),
+    'fungames': require('./src/assets/fonts/Fungames.otf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      console.log("🔹 Fontes carregadas, escondendo Splash Screen...");
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
       </View>
-    </ImageBackground>
+    );
+  }
+
+  return (
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <Home />
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white', // Para garantir visibilidade na imagem
-  },
-});
