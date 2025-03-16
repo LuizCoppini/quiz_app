@@ -10,6 +10,7 @@ export default function Logo(){
 
 }
 
+
 const style = StyleSheet.create({
 
     primary:{
