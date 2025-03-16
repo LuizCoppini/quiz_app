@@ -3,7 +3,7 @@ import { View, StatusBar, StyleSheet, Alert } from 'react-native';
 import Background from '../components/Background';
 import Questions from '../components/Questions';
 import QuestionsItens from '../data/constants/QuestionsConst';
-import Logo from '../components/Logo';
+import LogoName from '../components/LogoName';
 
 export default function Home() {
 
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <Background>
       <View style={styles.container}>
-        <Logo/>
+        <LogoName/>
         <Questions question={QuestionsItens[2]}></Questions>
         <StatusBar style="auto" />
       </View>

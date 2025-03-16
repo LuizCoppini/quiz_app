@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Logo(){
+
+export default function LogoName(){
     return(
         <View>
             <Text style={style.primary}>QuizGenAI:</Text>
@@ -9,7 +10,6 @@ export default function Logo(){
     )
 
 }
-
 
 const style = StyleSheet.create({
 
