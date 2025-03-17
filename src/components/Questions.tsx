@@ -12,16 +12,17 @@ export interface QuestionsProps{
 
 export default function Questions(props: QuestionsProps){
 
-    return(
+    const shuffledOptions = [...props.question.opcoes].sort(() => Math.random() - 0.5);
+
+    return (
         <View>
-            <Statement statement={props.question.enunciado}></Statement>
+            <Statement statement={props.question.enunciado} />
             <View>
-                {props.question.opcoes.map((opcao, indice) => (
-                    <Options key={indice} index={indice} text={opcao} onPress={() =>{}} />
+                {shuffledOptions.map((opcao, indice) => (
+                    <Options key={indice} index={indice} text={opcao} onPress={() => {}} />
                 ))}
             </View>
-            
         </View>
-    )
+    );
 
 }
