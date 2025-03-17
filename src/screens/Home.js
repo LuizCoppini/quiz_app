@@ -3,7 +3,7 @@ import { View, StyleSheet, ActivityIndicator, Alert, Button } from 'react-native
 import Background from '../components/Background';
 import Questions from '../components/Questions';
 import LogoName from '../components/LogoName';
-import { fetchRandomQuestion } from '../services/QuizServices';
+import { fetchRandomQuestion, fetchProceduralQuestion } from '../services/QuizServices';
 
 export default function Home() {
   const [question, setQuestion] = useState(null);
@@ -16,7 +16,7 @@ export default function Home() {
       const fetchedQuestion = await fetchRandomQuestion(
         101,
         ['artificial_intelligence','history','science'],
-        'pt'
+        'en'
       );
       setQuestion(fetchedQuestion);
     } catch (error) {

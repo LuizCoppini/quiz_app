@@ -40,9 +40,35 @@ export async function fetchRandomQuestion(id, typesArray, lang = "en") {
   const questionModel = {
     enunciado: data.question_translated || data.question,
     opcoes: data.options || [],
+    id_resposta: data.id || "",
     // Se você quiser guardar a resposta correta e usar depois:
     respostaCorreta: data.correct || ""
   };
 
   return questionModel;
+}
+
+export async function fetchProceduralQuestion(type, lang = "en") {
+
+  const baseURL = "https://questionsbackend-production.up.railway.app/api/procedural_question/";
+
+  const url = `${baseURL}?&types=${type}&lang=${lang}`;
+
+   // Chama a API
+   const response = await axios.get(url);
+   const data = response.data;
+
+   if (data.error) {
+    throw new Error(data.error);
+  }
+
+  const questionModel = {
+    enunciado: data.question,
+    opcoes: data.options || [],
+    respostaCorreta: data.correct || ""
+  };
+
+   return questionModel;
+
+
 }
