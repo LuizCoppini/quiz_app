@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import Home from './src/screens/Home';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+
+// Importe o seu AppNavigator
+import AppNavigator from './src/navigation/AppNavigator';
 
 // Impede que a splash screen feche automaticamente
 SplashScreen.preventAutoHideAsync();
@@ -32,7 +34,8 @@ export default function App() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Home />
+      {/* Em vez de <Home />, renderizamos o AppNavigator */}
+      <AppNavigator />
     </View>
   );
 }
