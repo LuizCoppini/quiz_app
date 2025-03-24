@@ -78,7 +78,6 @@ export default function Question({ route }) {
         <LogoName />
         <Questions question={question} />
         <Button title="Recarregar Database" onPress={loadDatabaseQuestion} />
-        <Button title="Carregar Procedural" onPress={loadProceduralQuestion} />
       </View>
     </Background>
   );
