@@ -1,11 +1,13 @@
 
-import { LinearGradient } from "expo-linear-gradient";
-import { StyleSheet, Text, View } from "react-native";
+//import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, Text, View, Image } from "react-native";
 
 
 
 export interface StatementProps {
-    statement: string
+    statement: string,
+    type: string,
+    level: string
 
 }
 
@@ -13,9 +15,14 @@ export interface StatementProps {
 export default function Statement(props: StatementProps) {
 
     return (
-        <View style={styles.container}>
-            <LinearGradient colors={['rgba(0,0,0,0.8)', 'transparent']} style={styles.background} />
-            <Text style={styles.text}>{props.statement}</Text>
+        <View>
+            <View style={styles.type}>
+                <Image source={require("../assets/icons/high-level.png")} style={styles.icon} />
+                <Text style={styles.label_text}>Artificial Intelligence</Text>
+            </View>
+            <View style={styles.container}>
+                <Text style={styles.questions_text}>{props.statement}</Text>
+            </View>
         </View>
     )
 
@@ -23,23 +30,56 @@ export default function Statement(props: StatementProps) {
 
 const styles = StyleSheet.create({
 
+    type:{
+        backgroundColor:'#f4f75c',
+        borderRadius:10,
+        borderWidth:3,
+        borderColor:'black',
+        padding:5,
+        top:6,
+        alignItems:'center',
+        alignSelf:'center',
+        fontSize:15,
+        fontStyle:'italic',
+        fontWeight:'bold',
+        flexDirection:'row',
+        
+    },
     container: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#edf065',
         borderRadius: 10,
-        width: '100%',
+        borderColor:'black',
+        borderWidth: 3,
+        alignSelf:'center',
+        width: '95%',
         padding: 10,
-        margin:20,
+        marginRight:20,
+        marginLeft:20,
+        marginBottom:20,
         marginHorizontal:20,
         alignItems: 'center',
         justifyContent: 'center'
 
     },
-    text: {
+    questions_text: {
         color: 'black',
         fontSize: 23,
         opacity: 0.8,
         textAlign: 'center',
         fontWeight:'bold'
+    },
+    label_text: {
+        color: 'black',
+        fontWeight:'bold',
+        paddingRight:10,
+    },
+    icon: {
+        width: 25,
+        height: 25,
+        alignSelf: 'center',
+        alignItems:'center',
+        marginRight: 10,
+        paddingRight:10
     },
     background:{
         position:'absolute',

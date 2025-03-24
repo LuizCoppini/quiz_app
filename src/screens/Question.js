@@ -4,6 +4,7 @@ import Background from '../components/Background';
 import Questions from '../components/Questions';
 import LogoName from '../components/LogoName';
 import { fetchRandomQuestion, fetchProceduralQuestion } from '../services/QuizServices';
+import Score from '../components/score';
 
 export default function Question({ route }) {
   const { mode } = route.params || { mode: 'database' }; 
@@ -52,6 +53,7 @@ export default function Question({ route }) {
     return (
       <Background>
         <View style={styles.container}>
+          <Score />
           <LogoName />
           <ActivityIndicator size="large" color="yellow" />
         </View>
@@ -75,10 +77,10 @@ export default function Question({ route }) {
   return (
     <Background>
       <View style={styles.container}>
+        <Score />
         <LogoName />
         <Questions question={question} />
         <Button title="Recarregar Database" onPress={loadDatabaseQuestion} />
-        <Button title="Carregar Procedural" onPress={loadProceduralQuestion} />
       </View>
     </Background>
   );
