@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // Importe suas telas
 import Home from '../screens/Home';
 import Question from '../screens/Question';
+import DatabaseModeSettings from '../screens/DatabaseModeSettings';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,13 @@ const AppNavigator = () => {
         <Stack.Screen 
           name="Question" 
           component={Question}
+          options={{ headerShown: false }}
+        />
+
+        {/* Tela de Configurações */}
+        <Stack.Screen 
+          name="DatabaseModeSettings" 
+          component={DatabaseModeSettings}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
