@@ -1,27 +1,35 @@
+import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 
 export interface TypeBtnProps {
     id: number,
-    text: string
+    text: string,
+    onPress:() => void
 }
 
 export default function TypeBtn(props: TypeBtnProps) {
 
     const images: { [key: number]: any } = {
         1: require('../assets/icons/ai.png'),
-        2: require('../assets/icons/science.png'), // Corrigido "sciense" para "science"
+        2: require('../assets/icons/science.png'),
         3: require('../assets/icons/history.png'),
         4: require('../assets/icons/geography.png'),
         5: require('../assets/icons/sports.png'),
         6: require('../assets/icons/arts.png'),
     };
 
-    // Se o ID não estiver mapeado, usar um ícone padrão
-    const selectedImage = images[props.id] || require('../assets/icons/geography.png');
+    const selectedImage = images[props.id];
+
+    const [borderColor, setBorderColor] = useState("green");
+
+    const handlePress = () => {
+        setBorderColor(prevColor => (prevColor === "green" ? "white" : "green")); 
+        props.onPress();
+    };
 
     return (
-        <View style={styles.container}>
-            <TouchableOpacity style={styles.btn_container}>
+        <View style={[styles.container, { borderColor }]}>
+            <TouchableOpacity style={styles.btn_container} onPress={handlePress}>
                 <Image source={selectedImage} style={styles.icon_image} />
                 <Text style={styles.text_types}>{props.text}</Text>
         </TouchableOpacity> 

@@ -9,6 +9,11 @@ export default function DatabaseModeSettings({ route, navigation }) {
 
     const { mode } = route.params || { mode: 'database' }; 
 
+    const handleButtonPress = (id) => {
+        console.log('Botão pressionado com ID:', id);
+   
+      };
+
     return(
         <Background>
             <View style={styles.container}>
@@ -16,15 +21,15 @@ export default function DatabaseModeSettings({ route, navigation }) {
 
                 <View style={styles.type_panel_container}>
                     <View style={styles.type_panel_row}>
-                        <TypeBtn id={1} text={'AI'}/>
-                        <TypeBtn id={2} text={'Science'}/>
-                        <TypeBtn id={3} text={'History'}/>
+                        <TypeBtn id={1} text={'AI'} onPress={() => handleButtonPress(1)}/>
+                        <TypeBtn id={2} text={'Science'} onPress={() => handleButtonPress(2)}/>
+                        <TypeBtn id={3} text={'History'} onPress={() => handleButtonPress(3)}/>
                     </View>
 
                     <View style={styles.type_panel_row}>
-                        <TypeBtn id={4} text={'Geo'}/>
-                        <TypeBtn id={5} text={'Sports'}/>
-                        <TypeBtn id={6} text={'Arts'}/>
+                        <TypeBtn id={4} text={'Geo'} onPress={() => handleButtonPress(4)}/>
+                        <TypeBtn id={5} text={'Sports'} onPress={() => handleButtonPress(5)}/>
+                        <TypeBtn id={6} text={'Arts'} onPress={() => handleButtonPress(6)}/>
                     </View>
                 </View>
 
