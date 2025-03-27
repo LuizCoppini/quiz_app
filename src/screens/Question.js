@@ -4,21 +4,55 @@ import Background from '../components/Background';
 import Questions from '../components/Questions';
 import LogoName from '../components/LogoName';
 import { fetchRandomQuestion, fetchProceduralQuestion } from '../services/QuizServices';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Score from '../components/score';
 
 export default function Question({ route }) {
-  const { mode } = route.params || { mode: 'database' }; 
-  // se não vier nada, assumimos 'database'
-  
+  const { mode } = route.params || { mode: 'database' };
+
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Este estado guardará o array final de temas (strings)
+  const [selectedThemes, setSelectedThemes] = useState([]);
+
+  // mapeie os IDs de botões para o tema que você passa para o serviço
+  const THEME_MAP = {
+    1: 'artificial_intelligence',
+    2: 'science',
+    3: 'history',
+    4: 'geography',
+    5: 'sports',
+    6: 'varieties'
+  };
+
+  useEffect(() => {
+    async function loadFromStorage() {
+      try {
+        const storedValue = await AsyncStorage.getItem('@selectedButtons'); // contém array de IDs
+        if (storedValue !== null) {
+          const selectedIds = JSON.parse(storedValue);
+          const mappedThemes = selectedIds.map((id) => THEME_MAP[id]);
+          setSelectedThemes(mappedThemes);
+        } else {
+          // Caso não exista nada salvo, pode definir um padrão ou deixar array vazio
+          setSelectedThemes([]);
+        }
+      } catch (error) {
+        console.log('Erro ao carregar dados do AsyncStorage:', error);
+      }
+    }
+    loadFromStorage();
+  }, []);
+
+  // Função para carregar questão do banco
   async function loadDatabaseQuestion() {
     try {
       setLoading(true);
+
       const fetchedQuestion = await fetchRandomQuestion(
-        101,
-        ['artificial_intelligence','history','science'],
+        Math.floor(Math.random() * 150) + 1, // ID aleatório entre 1 e 150
+        selectedThemes.length > 0 ? selectedThemes : ['artificial_intelligence','history','science'], 
         'en'
       );
       setQuestion(fetchedQuestion);
@@ -47,7 +81,7 @@ export default function Question({ route }) {
     } else {
       loadDatabaseQuestion();
     }
-  }, [mode]);
+  }, [mode, selectedThemes]); 
 
   if (loading) {
     return (
@@ -67,7 +101,7 @@ export default function Question({ route }) {
         <View style={styles.container}>
           <LogoName />
           <View>
-            {/* Pode mostrar um texto de erro / retry */}
+            {/* Pode mostrar um texto de erro ou um botão de retry aqui */}
           </View>
         </View>
       </Background>
@@ -91,6 +125,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    gap:20
+    gap: 20
   }
 });

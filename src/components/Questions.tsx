@@ -16,7 +16,7 @@ export default function Questions(props: QuestionsProps){
 
     return (
         <View>
-            <Statement statement={props.question.enunciado} />
+            <Statement statement={props.question.enunciado} type={props.question.type} level={props.question.level} />
             <View>
                 {shuffledOptions.map((opcao, indice) => (
                     <Options key={indice} index={indice} text={opcao} onPress={() => {}} />
