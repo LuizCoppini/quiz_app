@@ -1,11 +1,28 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Image, Alert } from "react-native";
 import LottieView from 'lottie-react-native';
 
 export default function Score() {
 
-const handleAnimationFinish = () => {
-    console.log('Animação finalizada!');
-    };
+    const [countdown, setCountdown] = useState(30);
+
+  // Efeito que roda 1x ao montar o componente e controla o countdown
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev > 1) {
+          return prev - 1;
+        } else {
+          clearInterval(intervalId);
+          //Alert.alert("Tempo Esgotado!");
+          return 0; 
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
 
   return (
     <View style={styles.container}>
@@ -14,12 +31,14 @@ const handleAnimationFinish = () => {
       <View style={styles.info_container}>
         <View style={styles.timer_icon_container}>
             <LottieView
-                source={require("../assets/animations/timer.json")}
+                source={require("../assets/animations/hourglass.json")}
                 autoPlay
-                loop={false}
-                onAnimationFinish={handleAnimationFinish}  
+                loop={true}  
                 style={styles.timer_animation}
             />
+        </View>
+        <View style={styles.countdown_text_container}>
+            <Text style={styles.countdown_text}>{countdown}</Text>
         </View>
         <View style={styles.error_icon_container}>
             <Image source={require("../assets/icons/error.png")} style={styles.error_icon_image}/>
@@ -64,7 +83,6 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     height: 30,
     borderColor: "black",
-    padding:3,
   },
 
   score_container: {
@@ -119,7 +137,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     alignItems: "center",
     justifyContent: "center",
-    bottom: 13,
+    bottom: 10,
     right: 6,
   },
 
@@ -132,6 +150,28 @@ const styles = StyleSheet.create({
   timer_animation: {
     width: 40,
     height: 40,
+  },
+
+  countdown_text_container: {
+    backgroundColor: "transparent",
+    height: 25,
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRightWidth: 3,
+    borderRightColor: "black",
+    marginRight: 5,
+
+  },
+
+  countdown_text: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginHorizontal: 5,
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
 
 });
