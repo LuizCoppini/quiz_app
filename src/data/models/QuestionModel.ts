@@ -4,4 +4,6 @@ export default interface QuestionsModel {
     opcoes: string[]
     id_resposta: number
     resposta: string
+    level: string
+    type: string
 }

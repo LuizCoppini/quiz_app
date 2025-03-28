@@ -1,7 +1,4 @@
-
-//import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet, Text, View, Image } from "react-native";
-
 
 
 export interface StatementProps {
@@ -11,14 +8,56 @@ export interface StatementProps {
 
 }
 
-
 export default function Statement(props: StatementProps) {
+
+    const images = {
+        1: require('../assets/icons/low-level.png'),
+        2: require('../assets/icons/medium-level.png'),
+        3: require('../assets/icons/high-level.png'),
+      };
+    
+    let selectedImage = [];
+    let text_leve =''
+
+    if(props.level === 'low'){
+        selectedImage = images[1];
+        text_leve = 'Low';
+    } else if(props.level === 'medium'){
+        selectedImage = images[2];
+        text_leve = 'Medium';
+    }
+    else { 
+        selectedImage = images[3];
+        text_leve = 'Hard';
+    }
+
+    let text_type = ''
+
+    if (props.type === 'artificial_intelligence') {
+        text_type = 'Artificial Intelligence'
+    } else if (props.type === 'science') {
+        text_type = 'Science'
+    }
+    else if (props.type === 'history') {
+        text_type = 'History'
+    }
+    else if (props.type === 'geography') {
+        text_type = 'Geography'
+    }
+    else if (props.type === 'sports') {
+        text_type = 'Sports'
+    }
+    else if (props.type === 'arts') {
+        text_type = 'Arts'
+    }
+
 
     return (
         <View>
             <View style={styles.type}>
-                <Image source={require("../assets/icons/high-level.png")} style={styles.icon} />
-                <Text style={styles.label_text}>Artificial Intelligence</Text>
+                <Text style={styles.label_level_text}>{text_leve}</Text>
+                <Image source={selectedImage} style={styles.icon} />
+                <Text style={styles.label_type_text}>{text_type}</Text>
             </View>
             <View style={styles.container}>
                 <Text style={styles.questions_text}>{props.statement}</Text>
@@ -68,10 +107,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight:'bold'
     },
-    label_text: {
+    label_type_text: {
         color: 'black',
         fontWeight:'bold',
-        paddingRight:10,
+        paddingRight: 5,
+    },
+    label_level_text: {
+        color: 'black',
+        fontWeight:'bold',
+        paddingLeft: 5,
+        paddingRight: 3,
     },
     icon: {
         width: 25,

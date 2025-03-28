@@ -3,12 +3,6 @@ import axios from "axios";
 
 
 export async function fetchRandomQuestion(id, typesArray, lang = "en") {
-  // Montar a URL do endpoint
-  // Observação: 'typesArray' deve ser um array de strings, ex: ['artificial_intelligence','history','science']
-  // O backend espera múltiplos "types" na query string, então faremos join.
-  
-  // Exemplo de URL:
-  //   ?id=105&types=artificial_intelligence&types=history&types=science&lang=pt
   
   const baseURL = "https://questionsbackend-production.up.railway.app/api/search_random_question/";
 
@@ -39,8 +33,10 @@ export async function fetchRandomQuestion(id, typesArray, lang = "en") {
 
   const questionModel = {
     enunciado: data.question_translated || data.question,
+    type: data.type || "unknown",
     opcoes: data.options || [],
     id_resposta: data.id || "",
+    level: data.level || 'unknown',
     // Se você quiser guardar a resposta correta e usar depois:
     respostaCorreta: data.correct || ""
   };
@@ -64,7 +60,9 @@ export async function fetchProceduralQuestion(type, lang = "en") {
 
   const questionModel = {
     enunciado: data.question,
+    type: data.type || "unknown",
     opcoes: data.options || [],
+    level: data.level || 'unknown',
     respostaCorreta: data.correct || ""
   };
 
