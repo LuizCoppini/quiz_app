@@ -1,28 +1,40 @@
-
+import { useEffect, useState } from 'react';
 import { View } from "react-native";
-import QuestionsModel from "../data/models/QuestionModel";
 import Statement from "./Statement";
 import Options from "./Options";
 
+export default function Questions(props) {
+  const { question, onOptionPress, selectedOption, answerStatus } = props;
 
-export interface QuestionsProps{
-    question: QuestionsModel
-}
+  const [shuffledOptions, setShuffledOptions] = useState([]);
 
+  // Toda vez que a pergunta mudar, re-embaralha uma única vez
+  useEffect(() => {
+    if (question?.opcoes) {
+      const newShuffled = [...question.opcoes].sort(() => Math.random() - 0.5);
+      setShuffledOptions(newShuffled);
+    }
+  }, [question]);
 
-export default function Questions(props: QuestionsProps){
-
-    const shuffledOptions = [...props.question.opcoes].sort(() => Math.random() - 0.5);
-
-    return (
-        <View>
-            <Statement statement={props.question.enunciado} type={props.question.type} level={props.question.level} />
-            <View>
-                {shuffledOptions.map((opcao, indice) => (
-                    <Options key={indice} index={indice} text={opcao} onPress={() => {}} />
-                ))}
-            </View>
-        </View>
-    );
-
+  return (
+    <View>
+      <Statement
+        statement={question.enunciado}
+        type={question.type}
+        level={question.level}
+      />
+      <View>
+        {shuffledOptions.map((opcao, indice) => (
+          <Options
+            key={indice}
+            index={indice}
+            text={opcao}
+            onPress={() => onOptionPress(opcao)}
+            isSelected={opcao === selectedOption}
+            answerStatus={answerStatus}
+          />
+        ))}
+      </View>
+    </View>
+  );
 }
