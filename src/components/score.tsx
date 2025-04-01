@@ -4,41 +4,50 @@ import LottieView from 'lottie-react-native';
 
 export interface ScoreProps {
   score: number;
-  questionId: string | number; // ou outro tipo que identifique a pergunta
-  onTimeOut: () => void;       // função a ser chamada quando zerar o tempo
+  questionId: string | number; 
+  onTimeOut: () => void;  // timer zero => erro
+  errorsCount: number;    // quantos ícones devem ficar vermelhos
 }
 
-export default function Score({ score, questionId, onTimeOut }: ScoreProps) {
+export default function Score({ score, questionId, onTimeOut, errorsCount }: ScoreProps) {
   const [countdown, setCountdown] = useState(30);
 
-  // Sempre que questionId mudar, reinicia o timer em 30 e inicia o intervalo
+  // Reinicia timer a cada questionId
   useEffect(() => {
-    // Reinicia o countdown
     setCountdown(30);
-
-    // Inicia o intervalo
     const intervalId = setInterval(() => {
       setCountdown((prev) => {
         if (prev > 1) {
           return prev - 1;
         } else {
-          // Se chegou a 1, ao decrementar vai pra 0, então encerramos
           clearInterval(intervalId);
-          console.log("Timer chegou a zero, chamando onTimeOut()");
-          // Chama a função avisando que o tempo acabou
-          onTimeOut?.();
+          setTimeout(() => {
+            onTimeOut?.();
+          }, 0);
           return 0;
         }
       });
     }, 1000);
-
-    // Limpa o intervalo se o componente desmontar antes de terminar
+  
     return () => clearInterval(intervalId);
   }, [questionId, onTimeOut]);
 
+  // Array de 3 índices p/ desenhar ícones
+  const errorIcons = [0, 1, 2].map((iconIndex) => {
+    // Se "iconIndex < errorsCount", pinta de vermelho; senão, cinza
+    const tintColor = iconIndex < errorsCount ? 'red' : undefined;
+
+    return (
+      <Image
+        key={iconIndex}
+        source={require("../assets/icons/error-gray.png")}
+        style={[styles.error_icon_image, tintColor ? { tintColor } : null]}
+      />
+    );
+  });
+
   return (
     <View style={styles.container}>
-
       {/* bloco branco à esquerda */}
       <View style={styles.info_container}>
         <View style={styles.timer_icon_container}>
@@ -55,18 +64,7 @@ export default function Score({ score, questionId, onTimeOut }: ScoreProps) {
         </View>
 
         <View style={styles.error_icon_container}>
-          <Image
-            source={require("../assets/icons/error.png")}
-            style={styles.error_icon_image}
-          />
-          <Image
-            source={require("../assets/icons/error.png")}
-            style={styles.error_icon_image}
-          />
-          <Image
-            source={require("../assets/icons/error.png")}
-            style={styles.error_icon_image}
-          />
+          {errorIcons}
         </View>
       </View>
 
@@ -86,6 +84,8 @@ export default function Score({ score, questionId, onTimeOut }: ScoreProps) {
     </View>
   );
 }
+
+// ################# STYLES #################
 
 const styles = StyleSheet.create({
   container: {

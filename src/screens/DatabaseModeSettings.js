@@ -62,7 +62,6 @@ export default function DatabaseModeSettings({ route, navigation }) {
                     </View>
                 </View>
 
-                <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
                 <HomeBtn text={'Play'} onPress={() => navigation.navigate('Question', { mode: 'database' })}/>
 
             </View>
