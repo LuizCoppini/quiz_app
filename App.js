@@ -19,7 +19,6 @@ export default function App() {
   useEffect(() => {
     async function prepareApp() {
       if (fontsLoaded) {
-        console.log("🔹 Fontes carregadas, escondendo Splash Screen...");
         await SplashScreen.hideAsync();
         setIsReady(true);
       }
