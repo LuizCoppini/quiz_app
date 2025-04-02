@@ -11,8 +11,8 @@ export default function Home({ navigation }) {
 
         <LogoName />
 
-        <HomeBtn text={'Database Questions'} onPress={() => navigation.navigate('DatabaseModeSettings', { mode: 'database' })}/>
-        <HomeBtn text='Procedural Questions'onPress={() => navigation.navigate('Question', { mode: 'procedural' })}/>
+        <HomeBtn text={'Database'} onPress={() => navigation.navigate('DatabaseModeSettings', { mode: 'database' })}/>
+        <HomeBtn text={'Procedural'} onPress={() => navigation.navigate('Question', { mode: 'procedural' })}/>
 
       </View>
     </Background>

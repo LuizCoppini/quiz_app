@@ -45,6 +45,6 @@ const styles = StyleSheet.create({
     text:{
         fontSize: 25,
         color: 'black',
-        fontFamily: 'Fungames',
+        fontFamily: 'fungames',
     }
 });

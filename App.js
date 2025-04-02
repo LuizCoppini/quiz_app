@@ -1,13 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-
-// Importe o seu AppNavigator
 import AppNavigator from './src/navigation/AppNavigator';
 
-// Impede que a splash screen feche automaticamente
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync(); // Impede que a splash feche automaticamente
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,14 +14,19 @@ export default function App() {
     'fungames': require('./src/assets/fonts/Fungames.otf'),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      console.log("🔹 Fontes carregadas, escondendo Splash Screen...");
-      await SplashScreen.hideAsync();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepareApp() {
+      if (fontsLoaded) {
+        await SplashScreen.hideAsync();
+        setIsReady(true);
+      }
     }
+    prepareApp();
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
+  if (!isReady) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size="large" />
@@ -32,10 +34,5 @@ export default function App() {
     );
   }
 
-  return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      {/* Em vez de <Home />, renderizamos o AppNavigator */}
-      <AppNavigator />
-    </View>
-  );
+  return <AppNavigator />;
 }
