@@ -16,6 +16,7 @@ A question-and-answer app built with **React Native** to showcase my development
 
 ### 📱 Frontend:
 - React Native
+- JavaScript
 - TypeScript
 - React Navigation
 - Axios
