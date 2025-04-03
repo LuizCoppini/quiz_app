@@ -6,7 +6,7 @@ import HomeBtn from '../components/HomeBtn';
 import TypeBtn from '../components/TypeBtn';
 
 
-export default function DatabaseModeSettings({ route, navigation }) {
+export default function DatabaseModeSettings({ navigation }) {
 
     const [selectedButtons, setSelectedButtons] = useState([]);
 
@@ -62,7 +62,11 @@ export default function DatabaseModeSettings({ route, navigation }) {
                     </View>
                 </View>
 
-                <HomeBtn text={'Play'} onPress={() => navigation.navigate('Question', { mode: 'database' })}/>
+                <HomeBtn 
+                  text={'Play'} 
+                  onPress={() => navigation.navigate('Question', { mode: 'database' })}
+                  disabled={selectedButtons.length === 0}  
+                />
 
             </View>
         </Background>
