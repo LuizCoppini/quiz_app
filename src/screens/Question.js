@@ -103,8 +103,6 @@ export default function Question({ route, navigation }) {
       const language = storedLanguage || 'en';  // Padrão se não estiver salvo
       const type = storedType || 'math'; 
 
-      console.log('Modo procedural:', language, type);
-
       const fetchedQuestion = await fetchProceduralQuestion(type, language);
       // ID pra reiniciar timer
       fetchedQuestion.id = `p_${Date.now()}_${Math.random()}`;

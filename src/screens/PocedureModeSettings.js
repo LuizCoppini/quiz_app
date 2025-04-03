@@ -88,6 +88,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: 'yellow',
         fontFamily: 'rocket_racoon',
+        alignContent:'center',
+        textAlign:'center',
     },
 
     type_panel_container: {

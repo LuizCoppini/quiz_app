@@ -46,7 +46,7 @@ export default function DatabaseModeSettings({ navigation }) {
     return(
         <Background>
             <View style={styles.container}>
-                <Text style={styles.label_types_text}>Choose the questions types:</Text>
+                <Text style={styles.label_types_text}>Pick Your Question Types</Text>
 
                 <View style={styles.type_panel_container}>
                     <View style={styles.type_panel_row}>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     label_types_text: {
         fontFamily:'rocket_racoon',
         color:'yellow',
-        textAlign:'left',
+        textAlign:'center',
         fontSize:30
     },
 
