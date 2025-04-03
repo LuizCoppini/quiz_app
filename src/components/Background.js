@@ -8,7 +8,7 @@ export default function Background({ children }) {
         source={require('../assets/images/background_app.jpg')}
         style={styles.image}
         resizeMode="cover"
-        imageStyle={{opacity:0.5}}
+        imageStyle={{opacity:0.8}}
       >
         {children}
       </ImageBackground>

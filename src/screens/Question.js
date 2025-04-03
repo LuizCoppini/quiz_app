@@ -173,20 +173,25 @@ export default function Question({ route, navigation }) {
   if (loading) {
     return (
       <Background>
+        {/* Score Fixo */}
+        <Score
+          score={score}
+          questionId={question?.id} 
+          onTimeOut={handleTimeOut}
+          errorsCount={errorsCount}
+        />
+  
+        {/* O restante do layout centralizado */}
         <View style={styles.container}>
-          <Score
-            score={score}
-            questionId={question?.id} 
-            onTimeOut={handleTimeOut}
-            errorsCount={errorsCount}
-          />
           <LogoName />
-          <ActivityIndicator size="large" color="yellow" />
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="yellow" />
+          </View>
         </View>
       </Background>
     );
   }
-
+  
   if (!question) {
     return (
       <Background>
@@ -202,15 +207,16 @@ export default function Question({ route, navigation }) {
 
   return (
     <Background>
-      <View style={styles.container}>
-        {/* Passamos errorsCount pra Score também no estado normal */}
-        <Score
+      <Score
           score={score}
           questionId={question.id}
           onTimeOut={handleTimeOut}
           errorsCount={errorsCount}
         />
 
+      <View style={styles.container}>
+        {/* Passamos errorsCount pra Score também no estado normal */}
+        
         <Questions
           question={question}
           onOptionPress={handleOptionPress}
@@ -225,10 +231,20 @@ export default function Question({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 20
-  }
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    gap:20,
+    paddingTop: 40,
+    paddingLeft: 5,
+    paddingRight: 5,
+  },
+
+  loadingContainer: {
+    marginTop: 10,
+  },
+
 });
