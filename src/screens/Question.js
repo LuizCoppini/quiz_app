@@ -96,7 +96,16 @@ export default function Question({ route, navigation }) {
       setSelectedOption("");
       setAnswerStatus("");
 
-      const fetchedQuestion = await fetchProceduralQuestion('science','en');
+      // Busca as configurações do modo procedural no AsyncStorage
+      const storedLanguage = await AsyncStorage.getItem('@proceduralLanguage');
+      const storedType = await AsyncStorage.getItem('@proceduralType');
+
+      const language = storedLanguage || 'en';  // Padrão se não estiver salvo
+      const type = storedType || 'math'; 
+
+      console.log('Modo procedural:', language, type);
+
+      const fetchedQuestion = await fetchProceduralQuestion(type, language);
       // ID pra reiniciar timer
       fetchedQuestion.id = `p_${Date.now()}_${Math.random()}`;
       setQuestion(fetchedQuestion);

@@ -35,7 +35,8 @@ export default function Statement(props: StatementProps) {
 
     if (props.type === 'artificial_intelligence') {
         text_type = 'Artificial Intelligence'
-    } else if (props.type === 'science') {
+    } 
+    else if (props.type === 'science') {
         text_type = 'Science'
     }
     else if (props.type === 'history') {
@@ -49,6 +50,9 @@ export default function Statement(props: StatementProps) {
     }
     else if (props.type === 'arts') {
         text_type = 'Arts'
+    }
+    else {
+        text_type = props.type
     }
 
 
