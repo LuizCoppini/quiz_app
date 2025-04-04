@@ -230,8 +230,7 @@ export default function Question({ route, navigation }) {
           selectedOption={selectedOption}
           answerStatus={answerStatus}
         />
-
-        <Button title="Recarregar Database" onPress={loadDatabaseQuestion} />
+        
       </View>
     </Background>
   );
