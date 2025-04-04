@@ -3,28 +3,32 @@ import { View, Text, StyleSheet } from "react-native";
 
 export default function LogoName(){
     return(
-        <View>
-            <Text style={style.primary}>QuizGenAI:</Text>
-            <Text style={style.secundary}>Only aswer the questions</Text>
+        <View style={styles.container}>
+            <Text style={styles.primary}>QuizGenAI:</Text>
+            <Text style={styles.secundary}>Only aswer the questions</Text>
         </View>
     )
 
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
+
+    container: {
+        backgroundColor: "transparent"
+    },
 
     primary:{
         fontFamily:'fungames',
         color:'yellow',
         textAlign:'left',
         fontSize:45
-
     },
+
     secundary:{
         fontFamily:'rocket_racoon',
         color:'yellow',
         textAlign:'left',
         fontSize:30
-    }
+    },
 
 })

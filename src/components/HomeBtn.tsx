@@ -1,48 +1,38 @@
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-
-
 export interface HomeBtnProps {
+    text: string;
+    disabled: boolean;
+    onPress: () => void;
+}
 
-    text: string,
-    onPress:() => void
-
-} 
-
-
-export default function HomeBtn(props: HomeBtnProps) {
+export default function HomeBtn({ text, disabled, onPress }: HomeBtnProps) {
     return (
-        <TouchableOpacity style={styles.backbutton}>
-            <TouchableOpacity onPress={props.onPress} style={styles.container}>
-                <Text style={styles.text}>{props.text}</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+            style={[styles.container, disabled && styles.disabledButton]}
+            onPress={disabled ? null : onPress}
+            disabled={disabled}
+        >
+            <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-
-    backbutton: {
-        backgroundColor: 'black',
-        alignItems: 'center',
-        borderRadius: 10,
-        justifyContent: 'center',
-        width: 250,
-        height: 60,
-
-    },
     container: {
         backgroundColor: 'white',
         borderRadius: 10,
         borderColor: 'black',
-        borderWidth: 1,
-        alignItems:'center',
-        width: 245,
-        padding: 10,
-        height: 55,
-
+        borderWidth: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 250,
+        height: 60,
     },
-    text:{
+    disabledButton: {
+        backgroundColor: 'gray',
+    },
+    text: {
         fontSize: 25,
         color: 'black',
         fontFamily: 'fungames',

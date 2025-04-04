@@ -48,7 +48,7 @@ export async function fetchProceduralQuestion(type, lang = "en") {
 
   const baseURL = "https://questionsbackend-production.up.railway.app/api/procedural_question/";
 
-  const url = `${baseURL}?&types=${type}&lang=${lang}`;
+  const url = `${baseURL}?&type=${type}&lang=${lang}`;
 
    // Chama a API
    const response = await axios.get(url);

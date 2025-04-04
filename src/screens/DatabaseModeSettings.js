@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Background from '../components/Background';
 import HomeBtn from '../components/HomeBtn';
 import TypeBtn from '../components/TypeBtn';
 
 
-export default function DatabaseModeSettings({ route, navigation }) {
+export default function DatabaseModeSettings({ navigation }) {
 
     const [selectedButtons, setSelectedButtons] = useState([]);
 
@@ -46,7 +46,7 @@ export default function DatabaseModeSettings({ route, navigation }) {
     return(
         <Background>
             <View style={styles.container}>
-                <Text style={styles.label_types_text}>Choose the questions types:</Text>
+                <Text style={styles.label_types_text}>Pick Your Question Types</Text>
 
                 <View style={styles.type_panel_container}>
                     <View style={styles.type_panel_row}>
@@ -62,7 +62,11 @@ export default function DatabaseModeSettings({ route, navigation }) {
                     </View>
                 </View>
 
-                <HomeBtn text={'Play'} onPress={() => navigation.navigate('Question', { mode: 'database' })}/>
+                <HomeBtn 
+                  text={'Play'} 
+                  onPress={() => navigation.navigate('Question', { mode: 'database' })}
+                  disabled={selectedButtons.length === 0}  
+                />
 
             </View>
         </Background>
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
     label_types_text: {
         fontFamily:'rocket_racoon',
         color:'yellow',
-        textAlign:'left',
+        textAlign:'center',
         fontSize:30
     },
 
